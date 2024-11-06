@@ -8,4 +8,4 @@ class ResConfigSettings(models.TransientModel):
     """
     _inherit = 'res.config.settings'
 
-    sale_order_limit = fields.Float(string="Sale Order Limit", config_parameter='module_sale_margin.end_of_service_year')
+    sale_order_limit = fields.Float(string="Sale Order Limit", config_parameter='zinfog_sale_order_extended.sale_order_limit')

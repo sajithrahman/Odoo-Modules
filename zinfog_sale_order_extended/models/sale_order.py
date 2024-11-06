@@ -77,9 +77,8 @@ class SaleOrder(models.Model):
                   AccessError: If the order amount exceeds the limit and the user lacks the required access rights.
         """
         res = super().action_confirm()
-        order_limit_amt = self.env['ir.config_parameter'].sudo().get_param(
-            'module_sale_order.sale_order_limit')
-        if order_limit_amt >= self.amount_total:
+        order_limit_amt = float(self.env['ir.config_parameter'].sudo().get_param('zinfog_sale_order_extended.sale_order_limit'))
+        if order_limit_amt <= self.amount_total:
             raise AccessError(_("Amount limit exceeded; requires Sale Admin access to confirm."))
         if self.auto_workflow:
             for pick in self.picking_ids:
