@@ -78,7 +78,7 @@ class SaleOrder(models.Model):
         """
         res = super().action_confirm()
         order_limit_amt = float(self.env['ir.config_parameter'].sudo().get_param('zinfog_sale_order_extended.sale_order_limit'))
-        if order_limit_amt <= self.amount_total:
+        if order_limit_amt <= self.amount_total and self.can_edit == False:
             raise AccessError(_("Amount limit exceeded; requires Sale Admin access to confirm."))
         if self.auto_workflow:
             for pick in self.picking_ids:
